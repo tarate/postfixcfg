@@ -128,14 +128,14 @@ do_dkim:
 	/usr/local/bin/opendkim-genkey -D /etc/opendkim/keys/${MAIL_DOMAIN}/ -d ${MAIL_DOMAIN} -s ${SELECTOR}
 	cp /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}.private /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}
 	chown -R opendkim:opendkim /etc/opendkim/keys/${MAIL_DOMAIN}
-	cp ./opendkim.conf /etc/opendkim.conf
-	cp ./KeyTable /etc/opendkim/KeyTable
+	cp ./dkim/opendkim.conf /etc/opendkim.conf
+	cp ./dkim/KeyTable /etc/opendkim/KeyTable
 	sed -i "s/{SELECTOR}/${SELECTOR}/g" /etc/opendkim/KeyTable
 	sed -i "s/{MAIL_DOMAIN}/${MAIL_DOMAIN}/g" /etc/opendkim/KeyTable
-	cp ./SigningTable /etc/opendkim/SigningTable
+	cp ./dkim/SigningTable /etc/opendkim/SigningTable
 	sed -i "s/{SELECTOR}/${SELECTOR}/g" /etc/opendkim/SigningTable
 	sed -i "s/{MAIL_DOMAIN}/${MAIL_DOMAIN}/g" /etc/opendkim/SigningTable
-	cp ./TrustedHosts /etc/opendkim/TrustedHosts
+	cp ./dkim/TrustedHosts /etc/opendkim/TrustedHosts
 	echo ${MAIL_DOMAIN} >> /etc/opendkim/TrustedHosts
 	echo ${TRUSTEDIP} >> /etc/opendkim/TrustedHosts
 	chkconfig --level 2345 opendkim on
@@ -163,20 +163,20 @@ do_dkim_with_rm_key:
 	mkdir -p /etc/opendkim/keys/${MAIL_DOMAIN}
 	/usr/local/bin/opendkim-genkey -D /etc/opendkim/keys/${MAIL_DOMAIN}/ -d ${MAIL_DOMAIN} -s ${SELECTOR}
 	# We use the exist key here!
-	cp ./opendkim_rm.private /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}
+	cp ./dkim/opendkim_rm.private /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}
 	chmod 600 /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}
 	rm /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}.private
-	cp ./opendkim_rm.txt /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}.txt
+	cp ./dkim/opendkim_rm.txt /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}.txt
 	# Finish override the new generated keys!
 	chown -R opendkim:opendkim /etc/opendkim/keys/${MAIL_DOMAIN}
-	cp ./opendkim.conf /etc/opendkim.conf
-	cp ./KeyTable /etc/opendkim/KeyTable
+	cp ./dkim/opendkim.conf /etc/opendkim.conf
+	cp ./dkim/KeyTable /etc/opendkim/KeyTable
 	sed -i "s/{SELECTOR}/${SELECTOR}/g" /etc/opendkim/KeyTable
 	sed -i "s/{MAIL_DOMAIN}/${MAIL_DOMAIN}/g" /etc/opendkim/KeyTable
-	cp ./SigningTable /etc/opendkim/SigningTable
+	cp ./dkim/SigningTable /etc/opendkim/SigningTable
 	sed -i "s/{SELECTOR}/${SELECTOR}/g" /etc/opendkim/SigningTable
 	sed -i "s/{MAIL_DOMAIN}/${MAIL_DOMAIN}/g" /etc/opendkim/SigningTable
-	cp ./TrustedHosts /etc/opendkim/TrustedHosts
+	cp ./dkim/TrustedHosts /etc/opendkim/TrustedHosts
 	echo ${MAIL_DOMAIN} >> /etc/opendkim/TrustedHosts
 	echo ${TRUSTEDIP} >> /etc/opendkim/TrustedHosts
 	chkconfig --level 2345 opendkim on
@@ -204,20 +204,20 @@ do_dkim_with_tc_key:
 	mkdir -p /etc/opendkim/keys/${MAIL_DOMAIN}
 	/usr/local/bin/opendkim-genkey -D /etc/opendkim/keys/${MAIL_DOMAIN}/ -d ${MAIL_DOMAIN} -s ${SELECTOR}
 	# We use the exist key here!
-	cp ./opendkim_tc.private /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}
+	cp ./dkim/opendkim_tc.private /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}
 	chmod 600 /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}
 	rm /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}.private
-	cp ./opendkim_tc.txt /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}.txt
+	cp ./dkim/opendkim_tc.txt /etc/opendkim/keys/${MAIL_DOMAIN}/${SELECTOR}.txt
 	# Finish override the new generated keys!
 	chown -R opendkim:opendkim /etc/opendkim/keys/${MAIL_DOMAIN}
-	cp ./opendkim.conf /etc/opendkim.conf
-	cp ./KeyTable /etc/opendkim/KeyTable
+	cp ./dkim/opendkim.conf /etc/opendkim.conf
+	cp ./dkim/KeyTable /etc/opendkim/KeyTable
 	sed -i "s/{SELECTOR}/${SELECTOR}/g" /etc/opendkim/KeyTable
 	sed -i "s/{MAIL_DOMAIN}/${MAIL_DOMAIN}/g" /etc/opendkim/KeyTable
-	cp ./SigningTable /etc/opendkim/SigningTable
+	cp ./dkim/SigningTable /etc/opendkim/SigningTable
 	sed -i "s/{SELECTOR}/${SELECTOR}/g" /etc/opendkim/SigningTable
 	sed -i "s/{MAIL_DOMAIN}/${MAIL_DOMAIN}/g" /etc/opendkim/SigningTable
-	cp ./TrustedHosts /etc/opendkim/TrustedHosts
+	cp ./dkim/TrustedHosts /etc/opendkim/TrustedHosts
 	echo ${MAIL_DOMAIN} >> /etc/opendkim/TrustedHosts
 	echo ${TRUSTEDIP} >> /etc/opendkim/TrustedHosts
 	chkconfig --level 2345 opendkim on
