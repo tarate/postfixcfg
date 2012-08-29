@@ -97,7 +97,7 @@ do_dual:
 	mkdir -p /var/spool/postfix2
 	mkdir -p /var/lib/postfix2
 	postfix -c /etc/postfix2 check
-	cp postfix2 /etc/init.d/postfix2
+	cp ./src/postfix2 /etc/init.d/postfix2
 	chmod +x /etc/init.d/postfix2
 	chkconfig --level 2345 postfix on
 	chkconfig --level 2345 postfix2 on
