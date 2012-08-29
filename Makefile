@@ -81,17 +81,21 @@ do_single:
 	echo Finish Setting Single Postfix
 
 do_dual:
-	yum -y install postfix
-	cp main1.cf /etc/postfix/main.cf
-	cp header_checks /etc/postfix/header_checks
+	rpm -i ./src/postfix-2.9.1-1.rhel5.x86_64.rpm
+	cp ./src/master.cf /etc/postfix/master.cf
+	cp ./src/transport /etc/postfix/transport
+	cp ./src/transport.db /etc/postfix/transport.db
+	cp ./src/header_checks /etc/postfix/header_checks
+	cp ./src/main1.cf /etc/postfix/main.cf
 	sed -i "s/{HOSTNAME}/${HOSTNAME1}/g" /etc/postfix/main.cf
 	sed -i "s/{IPADDRESS}/${IPADDRESS1}/g" /etc/postfix/main.cf
 	# Add configuration file for postfix2
 	cp -rf /etc/postfix /etc/postfix2
-	cp main2.cf /etc/postfix2/main.cf
+	cp ./src/main2.cf /etc/postfix2/main.cf
 	sed -i "s/{HOSTNAME}/${HOSTNAME2}/g" /etc/postfix2/main.cf
 	sed -i "s/{IPADDRESS}/${IPADDRESS2}/g" /etc/postfix2/main.cf
 	mkdir -p /var/spool/postfix2
+	mkdir -p /var/lib/postfix2
 	postfix -c /etc/postfix2 check
 	cp postfix2 /etc/init.d/postfix2
 	chmod +x /etc/init.d/postfix2

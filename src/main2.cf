@@ -1,8 +1,8 @@
 # LOCAL PATHNAME INFORMATION
-queue_directory = /var/spool/postfix
+queue_directory = /var/spool/postfix2
 command_directory = /usr/sbin
 daemon_directory = /usr/libexec/postfix
-data_directory = /var/lib/postfix
+data_directory = /var/lib/postfix2
 
 # QUEUE AND PROCESS OWNERSHIP
 mail_owner = postfix
@@ -41,7 +41,7 @@ readme_directory = /usr/share/doc/postfix-2.9.1-documentation/README_FILES
 inet_protocols = ipv4
 alias_database = hash:/etc/postfix/aliases
 alias_maps = hash:/etc/postfix/aliases
-syslog_name = postfix1
+syslog_name = postfix2
 
 # ADDTIONAL CONFIGURATION
 smtp_bind_address = {IPADDRESS}
