@@ -96,6 +96,8 @@ do_dual:
 	sed -i "s/{IPADDRESS}/${IPADDRESS2}/g" /etc/postfix2/main.cf
 	mkdir -p /var/spool/postfix2
 	mkdir -p /var/lib/postfix2
+	chown postfix /var/lib/postfix2 -R
+	chmod 700 /var/lib/postfix2
 	postfix -c /etc/postfix2 check
 	cp ./src/postfix2 /etc/init.d/postfix2
 	chmod +x /etc/init.d/postfix2
