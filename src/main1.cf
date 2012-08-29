@@ -8,17 +8,17 @@ data_directory = /var/lib/postfix
 mail_owner = postfix
 
 # INTERNET HOST AND DOMAIN NAMES
-myhostname = {HOSTNAME1}
+myhostname = {HOSTNAME}
 
 # RECEIVING MAIL
-inet_interfaces = {HOSTNAME1}
+inet_interfaces = {HOSTNAME}
 mydestination = $myhostname, localhost.$mydomain, localhost
 
 # REJECTING MAIL FOR UNKNOWN LOCAL USERS
 unknown_local_recipient_reject_code = 550
 
 # TRUST AND RELAY CONTROL
-mynetworks = 127.0.0.0/8, {IPADDRESS1}, 69.41.164.76, 69.41.161.49, 69.41.164.74, 69.41.164.75, 199.114.220.136
+mynetworks = 127.0.0.0/8, {IPADDRESS}, 69.41.164.76, 69.41.161.49, 69.41.164.74, 69.41.164.75, 199.114.220.136
 
 #JUNK MAIL CONTROLS
 header_checks = regexp:/etc/postfix/header_checks
@@ -43,7 +43,7 @@ alias_database = hash:/etc/postfix/aliases
 alias_maps = hash:/etc/postfix/aliases
 
 # ADDTIONAL CONFIGURATION
-smtp_bind_address = {IPADDRESS1}
+smtp_bind_address = {IPADDRESS}
 transport_maps = hash:/etc/postfix/transport
 domain1_destination_rate_delay = 3s
 domain2_destination_rate_delay = 3s
