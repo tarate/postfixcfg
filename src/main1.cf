@@ -1,0 +1,79 @@
+# LOCAL PATHNAME INFORMATION
+queue_directory = /var/spool/postfix
+command_directory = /usr/sbin
+daemon_directory = /usr/libexec/postfix
+data_directory = /var/lib/postfix
+
+# QUEUE AND PROCESS OWNERSHIP
+mail_owner = postfix
+
+# INTERNET HOST AND DOMAIN NAMES
+myhostname = {HOSTNAME1}
+
+# RECEIVING MAIL
+inet_interfaces = {HOSTNAME1}
+mydestination = $myhostname, localhost.$mydomain, localhost
+
+# REJECTING MAIL FOR UNKNOWN LOCAL USERS
+unknown_local_recipient_reject_code = 550
+
+# TRUST AND RELAY CONTROL
+mynetworks = 127.0.0.0/8, {IPADDRESS1}, 69.41.164.76, 69.41.161.49, 69.41.164.74, 69.41.164.75, 199.114.220.136
+
+#JUNK MAIL CONTROLS
+header_checks = regexp:/etc/postfix/header_checks
+
+#DEBUGGING CONTROL
+debug_peer_level = 2
+debugger_command =
+	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
+	 ddd $daemon_directory/$process_name $process_id & sleep 5
+
+# INSTALL-TIME CONFIGURATION INFORMATION
+sendmail_path = /usr/sbin/sendmail.postfix
+newaliases_path = /usr/bin/newaliases.postfix
+mailq_path = /usr/bin/mailq.postfix
+setgid_group = postdrop
+html_directory = /usr/share/doc/postfix-2.9.1-documentation/html
+manpage_directory = /usr/share/man
+sample_directory = /etc/postfix
+readme_directory = /usr/share/doc/postfix-2.9.1-documentation/README_FILES
+inet_protocols = ipv4
+alias_database = hash:/etc/postfix/aliases
+alias_maps = hash:/etc/postfix/aliases
+
+# ADDTIONAL CONFIGURATION
+smtp_bind_address = {IPADDRESS1}
+transport_maps = hash:/etc/postfix/transport
+domain1_destination_rate_delay = 3s
+domain2_destination_rate_delay = 3s
+domain3_destination_rate_delay = 10s
+domain1_destination_concurrency = 1
+domain2_destination_concurrency = 1
+domain3_destination_concurrency = 1
+domain1_destination_concurrency_limit = 1
+domain2_destination_concurrency_limit = 1
+domain3_destination_concurrency_limit = 1
+
+#performance
+smtp_connect_timeout = 120s
+smtp_helo_timeout = 100s
+default_process_limit = 30
+initial_destination_concurrency = 1
+default_destination_concurrency_limit = 1
+smtp_destination_concurrency_limit = 1
+default_destination_recipient_limit = 8
+queue_run_delay = 1000s
+minimal_backoff_time = 900s
+maximal_backoff_time = 3600s
+maximal_queue_lifetime = 2d
+bounce_queue_lifetime = 1d
+smtpd_error_sleep_time = 1000s
+smtpd_soft_error_limit = 10
+smtpd_hard_error_limit = 1
+
+#dkim
+smtpd_milters           = inet:127.0.0.1:8891
+non_smtpd_milters       = $smtpd_milters
+milter_default_action   = accept
+milter_protocol = 2
